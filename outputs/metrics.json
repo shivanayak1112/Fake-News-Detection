@@ -1,0 +1,182 @@
+{
+  "model": "TF-IDF + Logistic Regression",
+  "label_mapping": {
+    "0": "REAL",
+    "1": "FAKE"
+  },
+  "random_state": 42,
+  "threshold": 0.5,
+  "source_artifacts_stripped": false,
+  "dataset_profile": {
+    "total_rows": 44898,
+    "rows_after_deduplication": 38829,
+    "duplicate_rows_removed": 6069,
+    "class_balance": {
+      "REAL": 20929,
+      "FAKE": 17900
+    },
+    "text_column_used": "text",
+    "title_column_used": true
+  },
+  "validation_protocol": {
+    "holdout_test_size": 0.2,
+    "split_strategy": "stratified train/test split",
+    "cross_validation": "3-fold StratifiedKFold on training split only"
+  },
+  "cross_validation_train_only": {
+    "accuracy": {
+      "mean": 0.9920805823750701,
+      "std": 0.0007100007203177132
+    },
+    "macro_f1": {
+      "mean": 0.9920286991383254,
+      "std": 0.0007141774140922223
+    },
+    "roc_auc": {
+      "mean": 0.9993747448016052,
+      "std": 0.00011413934510775317
+    }
+  },
+  "train": {
+    "threshold": 0.5,
+    "accuracy": 0.9974245887390143,
+    "precision_fake": 0.9983202687569989,
+    "recall_fake": 0.9960893854748604,
+    "f1_fake": 0.9972035794183445,
+    "macro_f1": 0.9974084010821658,
+    "confusion_matrix": [
+      [
+        16719,
+        24
+      ],
+      [
+        56,
+        14264
+      ]
+    ],
+    "classification_report": {
+      "REAL": {
+        "precision": 0.9966616989567809,
+        "recall": 0.9985665651316968,
+        "f1-score": 0.9976132227459872,
+        "support": 16743.0
+      },
+      "FAKE": {
+        "precision": 0.9983202687569989,
+        "recall": 0.9960893854748604,
+        "f1-score": 0.9972035794183445,
+        "support": 14320.0
+      },
+      "accuracy": 0.9974245887390143,
+      "macro avg": {
+        "precision": 0.99749098385689,
+        "recall": 0.9973279753032787,
+        "f1-score": 0.9974084010821658,
+        "support": 31063.0
+      },
+      "weighted avg": {
+        "precision": 0.9974262973387504,
+        "recall": 0.9974245887390143,
+        "f1-score": 0.9974243777390065,
+        "support": 31063.0
+      }
+    },
+    "split": "train",
+    "roc_auc": 0.9998935267536138,
+    "average_precision": 0.9998744004458943
+  },
+  "holdout_test": {
+    "threshold": 0.5,
+    "accuracy": 0.993561679114087,
+    "precision_fake": 0.9955081414935429,
+    "recall_fake": 0.9905027932960894,
+    "f1_fake": 0.9929991598991879,
+    "macro_f1": 0.9935198421665188,
+    "confusion_matrix": [
+      [
+        4170,
+        16
+      ],
+      [
+        34,
+        3546
+      ]
+    ],
+    "classification_report": {
+      "REAL": {
+        "precision": 0.9919124643196955,
+        "recall": 0.9961777353081701,
+        "f1-score": 0.9940405244338498,
+        "support": 4186.0
+      },
+      "FAKE": {
+        "precision": 0.9955081414935429,
+        "recall": 0.9905027932960894,
+        "f1-score": 0.9929991598991879,
+        "support": 3580.0
+      },
+      "accuracy": 0.993561679114087,
+      "macro avg": {
+        "precision": 0.9937103029066192,
+        "recall": 0.9933402643021297,
+        "f1-score": 0.9935198421665188,
+        "support": 7766.0
+      },
+      "weighted avg": {
+        "precision": 0.9935700131585281,
+        "recall": 0.993561679114087,
+        "f1-score": 0.993560472279061,
+        "support": 7766.0
+      }
+    },
+    "split": "holdout_test",
+    "roc_auc": 0.9997200698257293,
+    "average_precision": 0.9996847221859976
+  },
+  "source_confounding": {
+    "group_col": "subject",
+    "available": true,
+    "n_groups": 7,
+    "crosstab": {
+      "Government News": {
+        "REAL": 0,
+        "FAKE": 531
+      },
+      "News": {
+        "REAL": 0,
+        "FAKE": 9050
+      },
+      "US_News": {
+        "REAL": 0,
+        "FAKE": 783
+      },
+      "left-news": {
+        "REAL": 0,
+        "FAKE": 705
+      },
+      "politics": {
+        "REAL": 0,
+        "FAKE": 6831
+      },
+      "politicsNews": {
+        "REAL": 11216,
+        "FAKE": 0
+      },
+      "worldnews": {
+        "REAL": 9713,
+        "FAKE": 0
+      }
+    },
+    "groups_with_real": 2,
+    "groups_with_fake": 5,
+    "confounding_score": 1.0,
+    "out_of_source_split_feasible": true,
+    "interpretation": "Both classes appear in multiple groups, so an out-of-source holdout (groups held out of training) is feasible and was attempted."
+  },
+  "out_of_source_holdout": null,
+  "notes": [
+    "Holdout metrics are more meaningful than training metrics, but the included dataset has known source/style leakage.",
+    "See outputs/leakage_report.json before making real-world claims.",
+    "Source artifacts were NOT stripped; this metric is inflated by wire-source leakage. Re-run with --strip-source-artifacts for an honest estimate."
+  ]
+}
